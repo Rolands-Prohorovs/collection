@@ -1,0 +1,124 @@
+:root {
+  --cream: #fdfbd4;
+  --khaki: #bdb76b;
+  --gold: #d4af37;
+  --copper: #ce8946;
+  --ink: #1f1a0f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Fredoka', system-ui, sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 18vh 1.5rem 2rem;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: underline;
+  text-decoration-color: var(--copper);
+  text-decoration-thickness: 6px;
+  text-underline-offset: 8px;
+}
+
+.joke-box {
+  width: 100%;
+  max-width: 480px;
+  min-height: 140px;
+  padding: 1.5rem;
+  background: var(--khaki);
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.joke-box p {
+  margin: 0;
+  white-space: pre-line;
+  text-align: left;
+}
+
+.punchline {
+  font-weight: 600;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font: inherit;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--gold);
+  border: 1px solid #000;
+  cursor: pointer;
+  transition: transform 0.1s, background 0.2s;
+}
+
+button:hover {
+  background: var(--copper);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+button.secondary {
+  background: transparent;
+}
+
+button.secondary:hover {
+  background: var(--khaki);
+}
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 640px;
+}
+
+.tile {
+  aspect-ratio: 1;
+  padding: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile.poems { background: var(--copper); }
+.tile.quotes { background: var(--khaki); }
+.tile.anegtoti { background: var(--gold); }
+
+.tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 4px 4px 0 #000;
+}
