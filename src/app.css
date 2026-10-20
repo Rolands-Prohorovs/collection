@@ -1,9 +1,12 @@
 :root {
-  --cream: #fdfbd4;
-  --khaki: #bdb76b;
-  --gold: #d4af37;
-  --copper: #ce8946;
-  --ink: #1f1a0f;
+  --cream: #0a0a0a;
+  --khaki: #171717;
+  --gold: #222222;
+  --copper: #303030;
+  --ink: #f5f5f5;
+
+  --border: #383838;
+  --muted: #a3a3a3;
 }
 
 * {
@@ -27,30 +30,22 @@ main {
   text-align: center;
 }
 
-h1 {
-  margin: 0;
-  font-size: clamp(2.5rem, 8vw, 4.5rem);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-decoration: underline;
-  text-decoration-color: var(--copper);
-  text-decoration-thickness: 6px;
-  text-underline-offset: 8px;
-}
-
+/* Joke and prompt cards */
 .joke-box {
   width: 100%;
   max-width: 480px;
   min-height: 140px;
-  padding: 1.5rem;
-  background: var(--khaki);
-  border: 1px solid #000;
+  padding: 1.75rem;
+  background: linear-gradient(145deg, #191919, #111111);
+  border: 1px solid var(--border);
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.75rem;
+  gap: 1rem;
   font-size: 1.2rem;
-  line-height: 1.4;
+  line-height: 1.6;
+  box-shadow: 0 10px 35px rgb(0 0 0 / 25%);
 }
 
 .joke-box p {
@@ -59,49 +54,74 @@ h1 {
   text-align: left;
 }
 
-.punchline {
-  font-weight: 600;
+.joke-box.prompt p {
+  text-align: center;
 }
 
+.punchline {
+  font-weight: 600;
+  color: #d4d4d4;
+}
+
+/* All buttons */
 button {
-  padding: 0.75rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   font: inherit;
   font-weight: 500;
   color: var(--ink);
-  background: var(--gold);
-  border: 1px solid #000;
+  background: #202020;
+  border: 1px solid #414141;
+  border-radius: 9px;
   cursor: pointer;
-  transition: transform 0.1s, background 0.2s;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 button:hover {
-  background: var(--copper);
+  background: #303030;
+  border-color: #686868;
   transform: translateY(-2px);
 }
 
 button:active {
   transform: translateY(0);
 }
+
+button:focus-visible {
+  outline: 2px solid #bdbdbd;
+  outline-offset: 4px;
+}
+
+/* Button groups */
 .choices {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 button.secondary {
+  color: var(--muted);
   background: transparent;
+  border-color: #303030;
 }
 
 button.secondary:hover {
-  background: var(--khaki);
+  color: var(--ink);
+  background: #1b1b1b;
+  border-color: #505050;
 }
+
+/* Homepage tiles */
 .tiles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1.25rem;
   width: 100%;
-  max-width: 640px;
+  max-width: 840px;
 }
 
 .tile {
@@ -112,13 +132,357 @@ button.secondary:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #151515;
+  border: 1px solid #353535;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgb(0 0 0 / 15%);
 }
 
-.tile.poems { background: var(--copper); }
-.tile.quotes { background: var(--khaki); }
-.tile.anegtoti { background: var(--gold); }
+.tile.poems {
+  background: #141414;
+}
+
+.tile.quotes {
+  background: #191919;
+}
+
+.tile.anegtoti {
+  background: #202020;
+}
 
 .tile:hover {
+  background: #292929;
+  border-color: #666666;
   transform: translateY(-4px);
-  box-shadow: 4px 4px 0 #000;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 35%);
+}
+
+/* Small screens */
+@media (max-width: 480px) {
+  main {
+    padding: 12vh 1rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .tile {
+    font-size: 1.2rem;
+    border-radius: 12px;
+  }
+
+  .joke-box {
+    padding: 1.25rem;
+    font-size: 1.05rem;
+  }
+
+  .choices {
+    gap: 0.65rem;
+  }
+
+  button {
+    padding: 0.7rem 1rem;
+  }
+}
+
+/* Quotes page */
+.quotes-header {
+  width: 100%;
+  text-align: center;
+}
+
+.quotes-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.quotes-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* Responsive grid */
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1100px;
+  align-items: stretch;
+}
+
+/* Individual quote */
+.quote-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  min-height: 200px;
+  text-align: left;
+
+  background: linear-gradient(145deg, #191919, #101010);
+  border: 1px solid #303030;
+  border-radius: 14px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.quote-card:hover {
+  transform: translateY(-4px);
+  border-color: #626262;
+  background: linear-gradient(145deg, #202020, #141414);
+}
+
+.quote-mark {
+  height: 35px;
+  color: #777777;
+  font-family: Georgia, serif;
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.quote-text {
+  flex: 1;
+  margin: 0;
+  color: #eeeeee;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.quote-author {
+  margin: 0;
+  align-self: flex-end;
+  color: #a3a3a3;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .quotes-grid {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .quote-card {
+    min-height: 160px;
+    padding: 1.25rem;
+  }
+}
+
+
+/* Quotes grid */
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.quote-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.8rem;
+
+  width: 100%;
+  min-height: 320px;
+  padding: 1.5rem;
+  text-align: left;
+  color: #fff;
+
+  background-color: #171717;
+  background-image:
+    linear-gradient(
+      to top,
+      rgb(0 0 0 / 95%) 0%,
+      rgb(0 0 0 / 65%) 45%,
+      rgb(0 0 0 / 10%) 100%
+    ),
+    var(--quote-image);
+  background-size: cover;
+  background-position: center;
+
+  border: 1px solid #383838;
+  border-radius: 14px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.quote-card:hover {
+  background-color: #171717;
+  background-image:
+    linear-gradient(
+      to top,
+      rgb(0 0 0 / 95%) 0%,
+      rgb(0 0 0 / 55%) 55%,
+      rgb(0 0 0 / 10%) 100%
+    ),
+    var(--quote-image);
+  background-size: cover;
+  background-position: center;
+  border-color: #777;
+  transform: translateY(-4px);
+}
+
+.quote-card:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+.quote-mark {
+  color: #ccc;
+  font-family: Georgia, serif;
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.quote-text {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.quote-author {
+  align-self: flex-end;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.quote-open {
+  margin-top: 0.5rem;
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+/* Expanded quote view */
+.quote-detail {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 1100px;
+  min-height: 75vh;
+  padding: clamp(2rem, 6vw, 5rem);
+
+  color: #fff;
+  background-color: #111;
+  background-image:
+    linear-gradient(
+      rgb(0 0 0 / 75%),
+      rgb(0 0 0 / 88%)
+    ),
+    var(--quote-image);
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #383838;
+  border-radius: 18px;
+}
+
+.detail-content {
+  width: 100%;
+  max-width: 720px;
+  margin: auto;
+}
+
+.close-detail {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1;
+
+  width: 44px;
+  height: 44px;
+  padding: 0;
+
+  font-size: 2rem;
+  line-height: 1;
+  background: rgb(20 20 20 / 75%);
+  border: 1px solid #666;
+  border-radius: 50%;
+}
+
+.detail-category {
+  margin: 0 0 1.5rem;
+  color: #bbb;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.detail-quote {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+}
+
+.detail-author {
+  margin-top: 1.5rem;
+  color: #ccc;
+  font-size: 1.05rem;
+}
+
+.detail-divider {
+  width: 70px;
+  height: 2px;
+  margin: 2rem 0;
+  background: #888;
+}
+
+.detail-content h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.detail-description {
+  margin: 0;
+  color: #d0d0d0;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .quotes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-card {
+    min-height: 280px;
+  }
+
+  .quote-detail {
+    min-height: 70vh;
+    padding: 4rem 1.5rem 2rem;
+    border-radius: 12px;
+  }
+
+  .detail-quote {
+    font-size: 2rem;
+  }
 }
